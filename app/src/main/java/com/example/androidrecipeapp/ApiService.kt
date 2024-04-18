@@ -10,6 +10,7 @@ private val retrofit = Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create())
     .build()
 
+// this is what gets exposed publicly.
 var recipeService = retrofit.create(ApiService::class.java)
 
 interface ApiService{
