@@ -6,39 +6,41 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-class MainViewModel: ViewModel() {
+class MainViewModel : ViewModel() {
 
     private val _categoryState = mutableStateOf(RecipeState())
 
     // this is the public variable that will be exposed to other classes.
     val categoriesState: State<RecipeState> = _categoryState
-    init{
+
+    init {
         fetchCategories()
     }
-    private fun fetchCategories(){
+
+    private fun fetchCategories() {
 
         // called on startup. immediately launched
         viewModelScope.launch {
-            try{
+            try {
                 // call the services and wait for response
                 val response = recipeService.getCategories()
 
-                // SUCCESS: update the view modal accordinly via
+                // SUCCESS: update the view modal accordingly via
                 // a "reducer" spread operation
                 _categoryState.value = _categoryState.value.copy(
                     list = response.categories,
                     error = null
                 )
 
-            }catch(e:Exception){
-                // FAILURE, update the view model accordinly via
+            } catch (e: Exception) {
+                // FAILURE, update the view model accordingly via
                 // a "reducer" spread operation
                 _categoryState.value = _categoryState.value.copy(
                     error = "Error fetching Categories: ${e.message}"
                 )
-            }finally {
+            } finally {
                 // stop the spinner
-                _categoryState.value  = _categoryState.value.copy(
+                _categoryState.value = _categoryState.value.copy(
                     loading = false
                 )
             }
@@ -46,8 +48,8 @@ class MainViewModel: ViewModel() {
     }
 
     data class RecipeState(
-        var loading:Boolean = true,
-        var list:List<Category> = emptyList(),
+        var loading: Boolean = true,
+        var list: List<Category> = emptyList(),
         var error: String? = null
     )
 }
