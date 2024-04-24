@@ -24,8 +24,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    RecipeApp(navController = navController)
-                    //RecipeScreen()
+                    // the starting place for the application
+                    RecipeApp(navHostController = navController)
+                    // RecipeScreen()
                 }
             }
         }

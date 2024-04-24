@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    // give the ability to serialize objects.
     id("kotlin-parcelize")
 }
 
