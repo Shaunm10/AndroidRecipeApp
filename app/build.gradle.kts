@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    // give the ability to serialize objects.
+    id("kotlin-parcelize")
 }
 
 android {
@@ -52,6 +54,10 @@ android {
 dependencies {
 
     // custom dependencies
+
+    // for navigation
+    implementation("androidx:navigation:navigation-compose:2.7.4")
+
     // Compose ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 
@@ -63,6 +69,12 @@ dependencies {
 
     // Image loading
     implementation("io.coil-kt:coil-compose:2.4.0")
+
+    val nav_version = "2.7.4"
+
+    // for navigation
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
